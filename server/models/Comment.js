@@ -1,0 +1,19 @@
+import mongoose from "mongoose";
+
+const commentSchema = new mongoose.Schema(
+  {
+    blog: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "aiblog",
+      required: true,
+    },
+    name: { type: String, required: true },
+    content: { type: String, required: true },
+    isApproved: { type: SVGAnimatedBoolean, default: false },
+  },
+  { timestamps: true }
+);
+
+const Comment = mongoose.model("Comment", commentSchema);
+
+export default Comment;
