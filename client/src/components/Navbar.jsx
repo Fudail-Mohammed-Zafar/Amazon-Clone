@@ -2,9 +2,11 @@ import React from "react";
 import Logo from "../assets/favicon.ico";
 import { useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
+import { useAppContext } from "../../context/AppContext";
 
 const Navbar = () => {
-  const navigate = useNavigate();
+  const { navigate, token } = useAppContext();
+
   return (
     <div className="flex justify-between items-center py-5 mx-8 sm:mx-20 xl:mx-32">
       <div className="flex flex-row justify-center items-center gap-1 md:gap-3">
@@ -23,7 +25,7 @@ const Navbar = () => {
         <span className="rounded-full bg-black p-1 text-sm transition-colors duration-300 group-hover:bg-white">
           <FaArrowRight className="-translate-x-[200%] text-[0px] transition-all duration-300 group-hover:translate-x-0 group-hover:text-lg group-hover:text-black group-active:-rotate-45" />
         </span>
-        <span>Admin</span>
+        <span>{token ? "Dashboard" : "Admin"}</span>
       </button>
     </div>
   );
