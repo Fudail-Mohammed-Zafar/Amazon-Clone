@@ -3,10 +3,12 @@ import Quill from "quill";
 import { blogCategories } from "../../assets/assets";
 import { useAppContext } from "../../../context/AppContext";
 import toast from "react-hot-toast";
+import { parse } from "marked";
 
 const AddBlog = () => {
   const { axios } = useAppContext();
   const [isAdding, setIsAdding] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const editorRef = useRef(null);
   const quillRef = useRef(null);
@@ -17,7 +19,24 @@ const AddBlog = () => {
   const [category, setCategory] = useState("Startup");
   const [isPublished, setIsPublished] = useState(false);
 
-  const generateContent = async (e) => {};
+  const generateContent = async (e) => {
+    if (!title) return toast.error("Please enter a title");
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/blog/generate", {
+        prompt: title,
+      });
+      if (data.success) {
+        quillRef.current.root.innerHTML = parse(data.content);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const onSubmitHandler = async (e) => {
     try {
@@ -41,6 +60,7 @@ const AddBlog = () => {
         toast.success(data.message);
         setImage(false);
         setTitle("");
+        setSubTitle("");
         quillRef.current.root.innerHTML = "";
         setCategory("Startup");
       } else {
@@ -60,7 +80,10 @@ const AddBlog = () => {
     }
   }, []);
   return (
-    <form className="flex-1 bg-blue-50/50 text-gray-600 h-full overflow-scroll">
+    <form
+      onSubmit={onSubmitHandler}
+      className="flex-1 bg-blue-50/50 text-gray-600 h-full overflow-scroll"
+    >
       <div className="bg-white w-full max-w-3xl p-4 md:p-10 sm:m-10 shadow rounded">
         <p>Upload thumbnail</p>
         <label htmlFor="image">
@@ -101,7 +124,13 @@ const AddBlog = () => {
         <p className="mt-4">Blog Description</p>
         <div className="max-w-lg h-74 pb-16 sm:pb-10 pt-2 relative">
           <div ref={editorRef}></div>
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/10 mt-2">
+              <div className="w-8 h-8 rounded-full border-2 border-t-white animate-spin"></div>
+            </div>
+          )}
           <button
+            disabled={loading}
             className="absolute bottom-1 right-1 ml-2 text-xs text-white bg-black/70 px-4 py-1.5 rounded hover:underline cursor-pointer"
             type="button"
             onClick={generateContent}
