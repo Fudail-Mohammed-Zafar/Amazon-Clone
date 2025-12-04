@@ -68,7 +68,7 @@ export const getBlogById = async (req, res) => {
     if (!blog) {
       res.json({ success: false, message: "Blog not found" });
     }
-    res.json({ success: false, blog });
+    res.json({ success: true, blog });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }

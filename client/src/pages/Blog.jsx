@@ -6,6 +6,7 @@ import Moment from "moment";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 const Blog = () => {
   const { id } = useParams(); // Hook allowing to access dynamic parameters from URL.
@@ -30,7 +31,7 @@ const Blog = () => {
     try {
       const { data } = await axios.post("/api/blog/comments", { blogId: id });
       if (data.success) {
-        setComments(data.message);
+        setComments(data.comments);
       } else {
         toast.error(data.message);
       }
@@ -82,7 +83,7 @@ const Blog = () => {
       </div>
 
       <div className="mx-5 max-w-5xl md:mx-auto my-10 mt-6">
-        <img src={"#"} alt="" className="rounded-3xl mb-5" />
+        <img src={data.image} alt="" className="rounded-3xl mb-5" />
         <div
           className="rich-text max-w-3xl mx-auto"
           dangerouslySetInnerHTML={{ __html: data.description }}
