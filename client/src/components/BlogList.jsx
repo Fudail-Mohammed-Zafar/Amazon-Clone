@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { blog_data, blogCategories } from "../assets/assets";
-import { motion } from "motion/react";
+import { useState } from "react";
+import { blogCategories } from "../assets/assets";
 import BlogCard from "./BlogCard";
-import { useAppContext } from "../../context/AppContext";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+import { useAppContext } from "../../context/useAppContext";
 
 const BlogList = () => {
   const [menu, setMenu] = useState("All");
@@ -15,7 +16,7 @@ const BlogList = () => {
     return blogs.filter(
       (blog) =>
         blog.title.toLowerCase().includes(input.toLowerCase()) ||
-        blog.category.toLowerCase().includes(input.toLowerCase())
+        blog.category.toLowerCase().includes(input.toLowerCase()),
     );
   };
   return (

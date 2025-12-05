@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import Quill from "quill";
 import { blogCategories } from "../../assets/assets";
-import { useAppContext } from "../../../context/AppContext";
 import toast from "react-hot-toast";
 import { parse } from "marked";
+import { useAppContext } from "../../../context/useAppContext";
 
 const AddBlog = () => {
   const { axios } = useAppContext();
@@ -19,7 +19,7 @@ const AddBlog = () => {
   const [category, setCategory] = useState("Startup");
   const [isPublished, setIsPublished] = useState(false);
 
-  const generateContent = async (e) => {
+  const generateContent = async () => {
     if (!title) return toast.error("Please enter a title");
     try {
       setLoading(true);
@@ -67,7 +67,7 @@ const AddBlog = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(data.message);
+      toast.error(error.message);
     } finally {
       setIsAdding(false);
     }

@@ -1,6 +1,5 @@
-import React from "react";
-import { useAppContext } from "../../../context/AppContext";
 import toast from "react-hot-toast";
+import { useAppContext } from "../../../context/useAppContext";
 
 const BlogTableItem = ({ blog, fetchBlogs, index }) => {
   const { title, createdAt } = blog;
@@ -10,7 +9,7 @@ const BlogTableItem = ({ blog, fetchBlogs, index }) => {
 
   const deleteBlog = async () => {
     const confirm = window.confirm(
-      "Are you sure you want to delete this blog?"
+      "Are you sure you want to delete this blog?",
     );
     if (!confirm) return;
     try {
@@ -22,7 +21,7 @@ const BlogTableItem = ({ blog, fetchBlogs, index }) => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(data.message);
+      toast.error(error.message);
     }
   };
 
@@ -38,7 +37,7 @@ const BlogTableItem = ({ blog, fetchBlogs, index }) => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(data.message);
+      toast.error(error.message);
     }
   };
   return (

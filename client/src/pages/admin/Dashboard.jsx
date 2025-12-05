@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { dashboard_data } from "../../assets/assets";
+import { useEffect, useState } from "react";
 import BlogTableItem from "../../components/admin/BlogTableItem";
-import { useAppContext } from "../../../context/AppContext";
 import toast from "react-hot-toast";
+import { useAppContext } from "../../../context/useAppContext";
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState({
@@ -27,7 +26,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchDashboard();
-  }, []);
+  });
   return (
     <div className="flex-1 p-4 md:p-10 bg-blue-50/50">
       <div className="flex flex-wrap gap-4">

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { comments_data } from "../../assets/assets";
+import { useEffect, useState } from "react";
 import CommentTableItem from "../../components/admin/CommentTableItem";
-import { useAppContext } from "../../../context/AppContext";
+import toast from "react-hot-toast";
+import { useAppContext } from "../../../context/useAppContext";
 
 const Comments = () => {
   const [comments, setComments] = useState([]);
@@ -19,7 +19,7 @@ const Comments = () => {
   };
   useEffect(() => {
     fetchComments();
-  }, []);
+  });
   return (
     <div className="flex-1 pt-5 px-5 sm:pt-12 sm:pl-16 bg-blue-50/50">
       <div className="flex justify-between items-center max-w-3xl">

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useAppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/useAppContext";
 
 const Header = () => {
   const { setInput, input } = useAppContext();

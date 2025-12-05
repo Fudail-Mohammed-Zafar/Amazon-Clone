@@ -1,5 +1,5 @@
-import React from "react";
-import { useAppContext } from "../../../context/AppContext";
+import toast from "react-hot-toast";
+import { useAppContext } from "../../../context/useAppContext";
 
 const CommentTableItem = ({ comment, fetchComments }) => {
   const { blog, createdAt, _id } = comment;
@@ -26,7 +26,7 @@ const CommentTableItem = ({ comment, fetchComments }) => {
   const deleteComment = async () => {
     try {
       const confirm = window.confirm(
-        "Are you sure you want to delete this comment?"
+        "Are you sure you want to delete this comment?",
       );
       if (!confirm) return;
       const { data } = await axios.post("/api/admin/delete-comment", {
