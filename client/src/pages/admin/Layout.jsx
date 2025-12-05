@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../../components/admin/Sidebar";
-import { useAppContext } from "../../../context/useAppContext";
+import { useAppContext } from "@/context/useAppContext";
+import Sidebar from "@/components/admin/Sidebar";
 
 const Layout = () => {
   const { axios, setToken, navigate } = useAppContext();

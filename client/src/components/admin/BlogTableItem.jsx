@@ -1,5 +1,5 @@
+import { useAppContext } from "@/context/useAppContext";
 import toast from "react-hot-toast";
-import { useAppContext } from "../../../context/useAppContext";
 
 const BlogTableItem = ({ blog, fetchBlogs, index }) => {
   const { title, createdAt } = blog;

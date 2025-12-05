@@ -1,4 +1,4 @@
-import { useAppContext } from "../../context/useAppContext";
+import { useAppContext } from "@/context/useAppContext";
 import Logo from "../assets/favicon.ico";
 import { FaArrowRight } from "react-icons/fa";
 

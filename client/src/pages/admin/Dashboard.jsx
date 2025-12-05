@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import BlogTableItem from "../../components/admin/BlogTableItem";
 import toast from "react-hot-toast";
-import { useAppContext } from "../../../context/useAppContext";
+import { useAppContext } from "@/context/useAppContext";
+import BlogTableItem from "@/components/admin/BlogTableItem";
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState({

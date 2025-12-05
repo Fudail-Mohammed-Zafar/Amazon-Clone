@@ -1,5 +1,5 @@
+import { useAppContext } from "@/context/useAppContext";
 import toast from "react-hot-toast";
-import { useAppContext } from "../../../context/useAppContext";
 
 const CommentTableItem = ({ comment, fetchComments }) => {
   const { blog, createdAt, _id } = comment;

@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import Quill from "quill";
-import { blogCategories } from "../../assets/assets";
 import toast from "react-hot-toast";
 import { parse } from "marked";
-import { useAppContext } from "../../../context/useAppContext";
+import { useAppContext } from "@/context/useAppContext";
+import { blogCategories } from "@/assets/assets";
 
 const AddBlog = () => {
   const { axios } = useAppContext();

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import Moment from "moment";
-import Footer from "../components/Footer";
-import Loader from "../components/Loader";
 import toast from "react-hot-toast";
-import { useAppContext } from "../../context/useAppContext";
+import { useAppContext } from "@/context/useAppContext";
+import Footer from "@/components/Footer";
+import Loader from "@/components/Loader";
+import Navbar from "@/components/Navbar";
 
 const Blog = () => {
   const { id } = useParams(); // Hook allowing to access dynamic parameters from URL.

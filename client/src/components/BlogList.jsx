@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { blogCategories } from "../assets/assets";
 import BlogCard from "./BlogCard";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { useAppContext } from "../../context/useAppContext";
+import { useAppContext } from "@/context/useAppContext";
+import { blogCategories } from "@/assets/assets";
 
 const BlogList = () => {
   const [menu, setMenu] = useState("All");
