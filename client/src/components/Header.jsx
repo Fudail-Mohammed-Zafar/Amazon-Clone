@@ -1,5 +1,6 @@
 import { useAppContext } from "@/context/useAppContext";
 import React, { useRef } from "react";
+import { FiArrowUpRight } from "react-icons/fi";
 
 const Header = () => {
   const { setInput, input } = useAppContext();
@@ -26,17 +27,18 @@ const Header = () => {
               className="flex origin-top-left items-center rounded-full border border-zinc-900 bg-white p-0.5 text-sm transition-transform hover:-rotate-2"
             >
               <span className="rounded-full bg-[#FF6154] px-2 py-0.5 font-medium text-white">
-                NEW:
+                HEY!
               </span>
               <span className="ml-1.5 mr-1 inline-block">
-                AI insights integrated! ✨
+                We're live on the web!
               </span>
+              <FiArrowUpRight className="mr-2 inline-block" />
             </a>
           </div>
         </div>
 
         <h1 className="text-3xl sm:text-6xl font-semibold sm:leading-16 text-gray-700">
-          Your only <span className="text-primary">finance</span> <br />{" "}
+          Your last <span className="text-primary">finance</span> <br />{" "}
           platform.
         </h1>
         <p className="my-6 sm:my-8 max-w-2xl m-auto max-sm:text-xs text-gray-500">
