@@ -1,13 +1,18 @@
 import express from "express";
 import "dotenv/config";
 import cors from "cors";
-import connectDB from "./configs/db.js";
+import connectMongoDb from "./configs/mongoDb.js";
+import { connectGemini } from "./configs/gemini.js";
+import { connectImageKit } from "./configs/imageKit.js";
 import adminRouter from "./routes/adminRoutes.js";
 import blogRouter from "./routes/blogRoutes.js";
 
 const app = express();
 
-await connectDB();
+// Test all connections
+await connectMongoDb();
+await connectGemini();
+connectImageKit();
 
 // Middlewares
 app.use(cors());
@@ -21,7 +26,7 @@ app.use("/api/blog", blogRouter);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log("Server is running on PORT " + PORT);
+  console.log(`Sever is running on PORT: ${PORT}`);
 });
 
 export default app;

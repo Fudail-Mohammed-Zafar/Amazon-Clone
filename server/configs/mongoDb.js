@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
-const connectDB = async () => {
+// Test MongoDB Connection
+const connectMongoDb = async () => {
   try {
     mongoose.connection.on("connected", () =>
-      console.log("Database Connected")
+      console.log("MongoDB is connected.")
     );
     await mongoose.connect(`${process.env.MONGODB_URI}/stockhub`);
   } catch (error) {
@@ -11,4 +12,4 @@ const connectDB = async () => {
   }
 };
 
-export default connectDB;
+export default connectMongoDb;
