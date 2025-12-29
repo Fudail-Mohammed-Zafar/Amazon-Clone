@@ -5,7 +5,6 @@ import { parse } from "marked";
 import { useAppContext } from "@/context/useAppContext";
 import { blogCategories } from "@/assets/assets";
 import { UploadCloud } from "lucide-react";
-import { div } from "motion/react-client";
 
 const AddBlog = () => {
   const { axios } = useAppContext();

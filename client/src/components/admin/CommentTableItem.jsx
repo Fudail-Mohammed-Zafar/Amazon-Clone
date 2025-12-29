@@ -60,13 +60,21 @@ const CommentTableItem = ({ comment, fetchComments }) => {
       <td className="px-6 py-4">
         <div className="inline-flex items-center gap-4">
           {!comment.isApproved ? (
-            <Check size={20} />
+            <Check 
+              size={20} 
+              onClick={approveComment}
+              className="cursor-pointer hover:text-green-600 transition-colors"
+            />
           ) : (
             <p className="text-xs border border-green-600 bg-green-100 text-green-600 rounded-full px-3 py-1">
               Approved
             </p>
           )}
-          <Trash size={20} />
+          <Trash 
+            size={20} 
+            onClick={deleteComment}
+            className="cursor-pointer hover:text-red-600 transition-colors"
+          />
         </div>
       </td>
     </tr>
