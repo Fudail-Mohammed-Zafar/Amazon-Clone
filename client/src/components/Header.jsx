@@ -1,6 +1,6 @@
 import { useAppContext } from "@/context/useAppContext";
+import { ArrowUpRight } from "lucide-react";
 import React, { useRef } from "react";
-import { FiArrowUpRight } from "react-icons/fi";
 
 const Header = () => {
   const { setInput, input } = useAppContext();
@@ -32,7 +32,7 @@ const Header = () => {
               <span className="ml-1.5 mr-1 inline-block">
                 We're live on the web!
               </span>
-              <FiArrowUpRight className="mr-2 inline-block" />
+              <ArrowUpRight className="mr-2 inline-block w-4" />
             </a>
           </div>
         </div>

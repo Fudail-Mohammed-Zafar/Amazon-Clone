@@ -1,3 +1,4 @@
+import { CirclePlus, House, MessageCircleMore, TableProperties } from "lucide-react";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
@@ -8,12 +9,11 @@ const Sidebar = () => {
         end={true}
         to={"/admin"}
         className={({ isActive }) =>
-          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${
-            isActive && "bg-primary/10 border-r-4 border-primary"
+          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-primary/10 border-r-4 border-primary"
           }`
         }
       >
-        <img src={"#"} alt="Home" className="min-w-4 w-5" />
+        <House size={20} />
         <p className="hidden md:inline-block">Dashboard</p>
       </NavLink>
 
@@ -21,12 +21,11 @@ const Sidebar = () => {
         end={true}
         to={"/admin/addBlog"}
         className={({ isActive }) =>
-          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${
-            isActive && "bg-primary/10 border-r-4 border-primary"
+          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-primary/10 border-r-4 border-primary"
           }`
         }
       >
-        <img src={"#"} alt="Add" className="min-w-4 w-5" />
+        <CirclePlus size={20} />
         <p className="hidden md:inline-block">Add Blogs</p>
       </NavLink>
 
@@ -34,12 +33,11 @@ const Sidebar = () => {
         end={true}
         to={"/admin/listBlog"}
         className={({ isActive }) =>
-          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${
-            isActive && "bg-primary/10 border-r-4 border-primary"
+          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-primary/10 border-r-4 border-primary"
           }`
         }
       >
-        <img src={"#"} alt="List" className="min-w-4 w-5" />
+        <TableProperties size={20} />
         <p className="hidden md:inline-block">Blog lists</p>
       </NavLink>
 
@@ -47,12 +45,11 @@ const Sidebar = () => {
         end={true}
         to={"/admin/comments"}
         className={({ isActive }) =>
-          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${
-            isActive && "bg-primary/10 border-r-4 border-primary"
+          `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-primary/10 border-r-4 border-primary"
           }`
         }
       >
-        <img src={"#"} alt="Comments" className="min-w-4 w-5" />
+        <MessageCircleMore size={20} />
         <p className="hidden md:inline-block">Comments</p>
       </NavLink>
     </div>

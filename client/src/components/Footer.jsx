@@ -1,13 +1,14 @@
 import React from "react";
 import Logo from "../assets/favicon.ico";
 import { footer_data } from "@/assets/assets";
+import { ChartNoAxesCombined } from "lucide-react";
 
 const Footer = () => {
   return (
     <div className="px-6 md:px-16 lg:px-24 xl:px-32 bg-primary/30">
       <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-gray-500/30 text-gray-500">
         <div>
-          <img src={Logo} alt="logo" className="w-32 md:w-44" />
+          <ChartNoAxesCombined className="w-32 md:w-44" />
           <p className="max-w-[410px] mt-6">
             Your one stop guide to learn about the stock markets! People think
             that investing in stock markets is risky, deadly, and what not! But

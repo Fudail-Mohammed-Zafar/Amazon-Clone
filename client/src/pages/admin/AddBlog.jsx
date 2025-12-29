@@ -4,6 +4,8 @@ import toast from "react-hot-toast";
 import { parse } from "marked";
 import { useAppContext } from "@/context/useAppContext";
 import { blogCategories } from "@/assets/assets";
+import { UploadCloud } from "lucide-react";
+import { div } from "motion/react-client";
 
 const AddBlog = () => {
   const { axios } = useAppContext();
@@ -87,11 +89,13 @@ const AddBlog = () => {
       <div className="bg-white w-full max-w-3xl p-4 md:p-10 sm:m-10 shadow rounded">
         <p>Upload thumbnail</p>
         <label htmlFor="image">
-          <img
-            src={!image ? "#" : URL.createObjectURL(image)}
+          {!image ? <><div className="w-[50%] flex justify-center items-center border mt-2 h-16 rounded cursor-pointer border-gray-200 p-5"><UploadCloud size={40} /></div></> : <img
+            src={URL.createObjectURL(image)}
             alt="upload_area"
             className="mt-2 h-16 rounded cursor-pointer"
-          />
+          />}
+
+
           <input
             onChange={(e) => setImage(e.target.files[0])}
             type="file"

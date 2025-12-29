@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useAppContext } from "@/context/useAppContext";
 import BlogTableItem from "@/components/admin/BlogTableItem";
+import { FilePen, House, MessageCircleMore } from "lucide-react";
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState({
@@ -31,7 +32,7 @@ const Dashboard = () => {
     <div className="flex-1 p-4 md:p-10 bg-blue-50/50">
       <div className="flex flex-wrap gap-4">
         <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
-          <img src="#" alt="dashboard" />
+          <House size={20} />
           <div>
             <p className="text-xl font-semibold text-gray-600">
               {dashboardData.blogs}
@@ -40,7 +41,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
-          <img src="#" alt="dashboard" />
+          <MessageCircleMore size={20} />
           <div>
             <p className="text-xl font-semibold text-gray-600">
               {dashboardData.comments}
@@ -49,7 +50,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
-          <img src="#" alt="dashboard" />
+          <FilePen size={20} />
           <div>
             <p className="text-xl font-semibold text-gray-600">
               {dashboardData.drafts}
@@ -60,7 +61,6 @@ const Dashboard = () => {
       </div>
       <div>
         <div className="flex items-center gap-3 m-4 mt-6 text-gray-600">
-          <img src={"#"} alt="/icon/" />
           <p>Latest Blogs</p>
         </div>
         <div className="relative max-w-4xl overflow-x-auto shadow rounded-lg scrollbar-hide bg-white">

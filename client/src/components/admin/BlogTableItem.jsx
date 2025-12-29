@@ -1,4 +1,5 @@
 import { useAppContext } from "@/context/useAppContext";
+import { CrossIcon, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 
 const BlogTableItem = ({ blog, fetchBlogs, index }) => {
@@ -47,9 +48,8 @@ const BlogTableItem = ({ blog, fetchBlogs, index }) => {
       <td className="px-2 py-4 max-sm:hidden">{BlogDate.toDateString()}</td>
       <td className="px-2 py-4 max-sm:hidden">
         <p
-          className={`${
-            blog.isPublished ? "text-green-600" : "text-orange-700"
-          }`}
+          className={`${blog.isPublished ? "text-green-600" : "text-orange-700"
+            }`}
         >
           {blog.isPublished ? "Published" : "Unpublished"}
         </p>
@@ -61,12 +61,7 @@ const BlogTableItem = ({ blog, fetchBlogs, index }) => {
         >
           {blog.isPublished ? "Unpublish" : "Publish"}
         </button>
-        <img
-          src="#"
-          alt="cross_icon"
-          onClick={deleteBlog}
-          className="w-8 hover:scale-110 transition-all cursor-pointer"
-        />
+        <Trash onClick={deleteBlog} className="active:scale-95 transition-all cursor-pointer" />
       </td>
     </tr>
   );

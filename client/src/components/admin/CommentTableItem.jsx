@@ -1,4 +1,5 @@
 import { useAppContext } from "@/context/useAppContext";
+import { Check, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 
 const CommentTableItem = ({ comment, fetchComments }) => {
@@ -59,23 +60,13 @@ const CommentTableItem = ({ comment, fetchComments }) => {
       <td className="px-6 py-4">
         <div className="inline-flex items-center gap-4">
           {!comment.isApproved ? (
-            <img
-              onClick={approveComment}
-              src="#"
-              alt="tick_icon"
-              className="w-5 hover:scale-110 transition-all cursor-pointer"
-            />
+            <Check size={20} />
           ) : (
             <p className="text-xs border border-green-600 bg-green-100 text-green-600 rounded-full px-3 py-1">
               Approved
             </p>
           )}
-          <img
-            onClick={deleteComment}
-            src="#"
-            alt="bin_icon"
-            className="w-5 hover:scale-110 transition-all cursor-pointer"
-          />
+          <Trash size={20} />
         </div>
       </td>
     </tr>
