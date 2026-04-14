@@ -1,5 +1,5 @@
 import { useAppContext } from "@/context/useAppContext";
-import { CrossIcon, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 import toast from "react-hot-toast";
 
 const BlogTableItem = ({ blog, fetchBlogs, index }) => {
@@ -42,26 +42,41 @@ const BlogTableItem = ({ blog, fetchBlogs, index }) => {
     }
   };
   return (
-    <tr className="border-y border-gray-300">
-      <th className="px-2 py-4">{index}</th>
-      <td className="px-2 py-4">{title}</td>
-      <td className="px-2 py-4 max-sm:hidden">{BlogDate.toDateString()}</td>
-      <td className="px-2 py-4 max-sm:hidden">
-        <p
-          className={`${blog.isPublished ? "text-green-600" : "text-orange-700"
-            }`}
+    <tr className="border-b border-[var(--border-soft)] text-[var(--ink-muted)]">
+      <th className="px-4 py-4 text-left text-sm font-semibold text-[var(--ink-900)] sm:px-5">
+        {index}
+      </th>
+      <td className="max-w-[360px] px-4 py-4 text-sm font-medium text-[var(--ink-900)] sm:px-5">
+        {title}
+      </td>
+      <td className="px-4 py-4 max-sm:hidden sm:px-5">{BlogDate.toDateString()}</td>
+      <td className="px-4 py-4 max-sm:hidden sm:px-5">
+        <span
+          className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${
+            blog.isPublished
+              ? "bg-emerald-50 text-emerald-700"
+              : "bg-amber-50 text-amber-700"
+          }`}
         >
           {blog.isPublished ? "Published" : "Unpublished"}
-        </p>
+        </span>
       </td>
-      <td className="px-2 py-4 flex text-xs gap-3">
+      <td className="px-4 py-4 sm:px-5">
+        <div className="flex items-center gap-2">
         <button
           onClick={togglePublish}
-          className="border px-2 py-0.5 mt-1 rounded cursor-pointer"
+          className="rounded-lg border border-[var(--border-soft)] px-2.5 py-1 text-xs font-medium transition hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]"
         >
           {blog.isPublished ? "Unpublish" : "Publish"}
         </button>
-        <Trash onClick={deleteBlog} className="active:scale-95 transition-all cursor-pointer" />
+          <button
+            onClick={deleteBlog}
+            className="rounded-lg border border-[var(--border-soft)] p-1.5 text-[var(--ink-muted)] transition hover:border-red-200 hover:text-red-600"
+            aria-label="Delete blog"
+          >
+            <Trash className="h-4 w-4" />
+          </button>
+        </div>
       </td>
     </tr>
   );

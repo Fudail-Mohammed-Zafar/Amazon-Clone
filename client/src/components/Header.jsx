@@ -1,88 +1,98 @@
 import { useAppContext } from "@/context/useAppContext";
-import { ArrowUpRight } from "lucide-react";
-import React, { useRef } from "react";
+import { ArrowUpRight, Search, X } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 const Header = () => {
   const { setInput, input } = useAppContext();
-  const inputRef = useRef();
+  const [query, setQuery] = useState(input);
 
-  const onSubmitHandler = async (e) => {
+  useEffect(() => {
+    setQuery(input);
+  }, [input]);
+
+  const onSubmitHandler = (e) => {
     e.preventDefault();
-    setInput(inputRef.current.value);
+    setInput(query.trim());
   };
 
-  const onClear = async () => {
+  const onClearSearch = () => {
     setInput("");
-    inputRef.current.value = "";
+    setQuery("");
+  };
+
+  const onClearInput = () => {
+    setQuery("");
+    setInput("");
   };
 
   return (
-    <div className="mx-8 sm:mx-16 xl:mx-24 relative">
-      <div className="text-center mt-20 mb-8">
-        <div className="inline-flex items-center justify-center mb-4">
-          <div className="mb-1.5 w-fit rounded-full bg-zinc-600">
-            <a
-              href="#"
-              rel="nofollow"
-              className="flex origin-top-left items-center rounded-full border border-zinc-900 bg-white p-0.5 text-sm transition-transform hover:-rotate-2"
-            >
-              <span className="rounded-full bg-[#FF6154] px-2 py-0.5 font-medium text-white">
-                HEY!
-              </span>
-              <span className="ml-1.5 mr-1 inline-block">
-                We're live on the web!
-              </span>
-              <ArrowUpRight className="mr-2 inline-block w-4" />
-            </a>
+    <section className="mx-auto w-[min(1120px,92%)] pt-6 sm:pt-10">
+      <div className="px-1 pb-2 pt-8 sm:px-6 sm:pb-4 sm:pt-12">
+
+        <div className="relative text-center">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--border-soft)] bg-[var(--surface-main)]/80 px-3 py-1 text-xs font-semibold tracking-wide text-[var(--brand-primary)] sm:text-sm">
+            <span className="rounded-full bg-[var(--brand-accent)] px-2 py-0.5 text-white">
+              LIVE
+            </span>
+            Weekly market stories that stay practical
+            <ArrowUpRight className="h-4 w-4" />
           </div>
+
+          <h1 className="font-display text-4xl leading-tight text-[var(--ink-900)] sm:text-6xl">
+            Learn Finance Without
+            <span className="block text-[var(--brand-primary)]">The Noise</span>
+          </h1>
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[var(--ink-muted)] sm:text-base">
+            StockHub breaks down market ideas, startup lessons, and money habits
+            into short reads you can actually use. Skip the jargon and get
+            practical insights every week.
+          </p>
+
+          <form
+            onSubmit={onSubmitHandler}
+            className="mx-auto mt-8 flex w-full max-w-2xl flex-col gap-3 rounded-2xl border border-[var(--border-soft)] bg-white p-2 shadow-[0_12px_24px_rgba(9,30,66,0.07)] sm:flex-row"
+          >
+            <label className="relative flex-1">
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--ink-muted)]" />
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search for finance, startup, or tech blogs"
+                required
+                className="h-12 w-full rounded-xl border border-transparent bg-[var(--surface-main)] pl-9 pr-10 text-sm text-[var(--ink-900)] outline-none transition focus:border-[var(--brand-primary)] sm:text-base"
+              />
+
+              {query && (
+                <button
+                  type="button"
+                  onClick={onClearInput}
+                  aria-label="Clear input"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--ink-muted)] transition hover:text-[var(--ink-900)]"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+            </label>
+            <button
+              type="submit"
+              className="h-12 rounded-xl bg-[var(--brand-primary)] px-8 text-sm font-semibold text-white transition hover:bg-[var(--brand-primary-dark)] hover:shadow-[0_8px_20px_rgba(15,76,92,0.25)] sm:text-base"
+            >
+              Search
+            </button>
+          </form>
+
+          {input && (
+            <button
+              onClick={onClearSearch}
+              className="mt-4 rounded-full border border-[var(--border-soft)] bg-white px-4 py-1.5 text-xs font-semibold text-[var(--ink-muted)] transition hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]"
+            >
+              Clear search
+            </button>
+          )}
         </div>
-
-        <h1 className="text-3xl sm:text-6xl font-semibold sm:leading-16 text-gray-700">
-          Your last <span className="text-primary">finance</span> <br />{" "}
-          platform.
-        </h1>
-        <p className="my-6 sm:my-8 max-w-2xl m-auto max-sm:text-xs text-gray-500">
-          Your one stop guide to learn about the stock markets! People think
-          that investing in stock markets is risky, deadly, and what not, but
-          StockHub is here to teach you how to buy the castle you always wanted.
-          Every dream has a price!
-        </p>
-
-        <form
-          onSubmit={onSubmitHandler}
-          className="flex justify-between max-w-lg max-sm:scale-75 mx-auto border border-gray-300 bg-white rounded overflow-hidden"
-        >
-          <input
-            ref={inputRef}
-            type="text"
-            placeholder="Search for blogs"
-            required
-            className="w-full pl-4 outline-none"
-          />
-          <button
-            type="submit"
-            className="bg-primary text-white px-8 py-2 m-1.5 rounded hover:scale-105 transition-all cursor-pointer"
-          >
-            Search
-          </button>
-        </form>
       </div>
-      <div className="text-center">
-        {input && (
-          <button
-            onClick={onClear}
-            className="border font-light text-xs py-1 px-3 rounded-sm shadow-custom-sm cursor-pointer"
-          >
-            Clear Search
-          </button>
-        )}
-      </div>
-      {/* <img
-        src={Logo}
-        alt="Gradient Background"
-        className="absolute -top-50 -z-1 opacity-50"
-      /> */}
-    </div>
+    </section>
   );
 };
 

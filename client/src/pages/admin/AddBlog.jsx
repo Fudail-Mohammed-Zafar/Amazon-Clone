@@ -80,19 +80,42 @@ const AddBlog = () => {
       quillRef.current = new Quill(editorRef.current, { theme: "snow" });
     }
   }, []);
+
   return (
     <form
       onSubmit={onSubmitHandler}
-      className="flex-1 bg-blue-50/50 text-gray-600 h-full overflow-scroll"
+      className="ui-animate-fade-up p-5 text-[var(--ink-muted)] sm:p-7 lg:p-8"
+      style={{ animationDelay: "60ms" }}
     >
-      <div className="bg-white w-full max-w-3xl p-4 md:p-10 sm:m-10 shadow rounded">
-        <p>Upload thumbnail</p>
+      <div className="ui-animate-fade-up mb-6" style={{ animationDelay: "120ms" }}>
+        <p className="text-xs font-semibold tracking-[0.15em] text-[var(--brand-primary)]">
+          CREATE
+        </p>
+        <h1 className="font-display mt-1 text-2xl text-[var(--ink-900)] sm:text-3xl">
+          Add New Blog
+        </h1>
+        <p className="mt-2 text-sm text-[var(--ink-muted)]">
+          Draft a post, generate AI-assisted content, and publish when ready.
+        </p>
+      </div>
+
+      <div
+        className="ui-animate-fade-up w-full max-w-4xl rounded-2xl border border-[var(--border-soft)] bg-white p-5 shadow-[0_10px_24px_rgba(9,30,66,0.06)] sm:p-7"
+        style={{ animationDelay: "200ms" }}
+      >
+        <p className="font-medium text-[var(--ink-900)]">Upload thumbnail</p>
         <label htmlFor="image">
-          {!image ? <><div className="w-[50%] flex justify-center items-center border mt-2 h-16 rounded cursor-pointer border-gray-200 p-5"><UploadCloud size={40} /></div></> : <img
-            src={URL.createObjectURL(image)}
-            alt="upload_area"
-            className="mt-2 h-16 rounded cursor-pointer"
-          />}
+          {!image ? (
+            <div className="mt-3 flex h-24 w-full max-w-md items-center justify-center rounded-xl border border-dashed border-[var(--border-soft)] bg-[var(--surface-main)] text-[var(--ink-muted)] cursor-pointer transition hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]">
+              <UploadCloud size={28} />
+            </div>
+          ) : (
+            <img
+              src={URL.createObjectURL(image)}
+              alt="upload_area"
+              className="mt-3 h-24 rounded-xl cursor-pointer object-cover"
+            />
+          )}
 
 
           <input
@@ -104,48 +127,49 @@ const AddBlog = () => {
           />
         </label>
 
-        <p className="mt-4">Blog title</p>
+        <p className="mt-6 font-medium text-[var(--ink-900)]">Blog title</p>
         <input
           type="text"
           placeholder="Type here"
           required
-          className="w-full max-w-lg mt-2 p-2 border border-gray-300 outline-none rounded"
+          className="mt-2 w-full max-w-2xl rounded-xl border border-[var(--border-soft)] bg-white p-3 outline-none transition focus:border-[var(--brand-primary)]"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
 
-        <p className="mt-4">Sub title</p>
+        <p className="mt-4 font-medium text-[var(--ink-900)]">Sub title</p>
         <input
           type="text"
           placeholder="Type here"
           required
-          className="w-full max-w-lg mt-2 p-2 border border-gray-300 outline-none rounded"
+          className="mt-2 w-full max-w-2xl rounded-xl border border-[var(--border-soft)] bg-white p-3 outline-none transition focus:border-[var(--brand-primary)]"
           onChange={(e) => setSubTitle(e.target.value)}
           value={subTitle}
         />
 
-        <p className="mt-4">Blog Description</p>
-        <div className="max-w-lg h-74 pb-16 sm:pb-10 pt-2 relative">
+        <p className="mt-4 font-medium text-[var(--ink-900)]">Blog Description</p>
+        <div className="relative max-w-3xl pb-16 pt-2 sm:pb-10">
           <div ref={editorRef}></div>
           {loading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/10 mt-2">
-              <div className="w-8 h-8 rounded-full border-2 border-t-white animate-spin"></div>
+            <div className="absolute inset-0 mt-2 flex items-center justify-center bg-black/10">
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-t-white"></div>
             </div>
           )}
           <button
             disabled={loading}
-            className="absolute bottom-1 right-1 ml-2 text-xs text-white bg-black/70 px-4 py-1.5 rounded hover:underline cursor-pointer"
+            className="absolute bottom-1 right-1 ml-2 rounded-lg bg-[var(--brand-primary)] px-4 py-1.5 text-xs text-white transition hover:bg-[var(--brand-primary-dark)] cursor-pointer"
             type="button"
             onClick={generateContent}
           >
             Generate with AI
           </button>
         </div>
-        <p className="mt-4">Blog Category</p>
+
+        <p className="mt-4 font-medium text-[var(--ink-900)]">Blog Category</p>
         <select
           onChange={(e) => setCategory(e.target.value)}
           name="category"
-          className="mt-2 px-3 py-2 border text-gray-500 border-gray-300 outline-none rounded"
+          className="mt-2 rounded-xl border border-[var(--border-soft)] px-3 py-2 text-[var(--ink-muted)] outline-none transition focus:border-[var(--brand-primary)]"
         >
           <option value="">Select category</option>
           {blogCategories.map((item, index) => {
@@ -157,8 +181,8 @@ const AddBlog = () => {
           })}
         </select>
 
-        <div className="flex gap-2 mt-4">
-          <p>Publish Now</p>
+        <div className="mt-5 flex items-center gap-2">
+          <p className="font-medium text-[var(--ink-900)]">Publish Now</p>
           <input
             type="checkbox"
             checked={isPublished}
@@ -170,7 +194,7 @@ const AddBlog = () => {
         <button
           disabled={isAdding}
           type="submit"
-          className="mt-8 w-40 h-10 bg-primary text-white rounded cursor-pointer text-sm"
+          className="mt-8 h-11 w-40 rounded-xl bg-[var(--brand-primary)] text-sm font-semibold text-white transition hover:bg-[var(--brand-primary-dark)] cursor-pointer"
         >
           {isAdding ? "Adding" : "Add Blog"}
         </button>

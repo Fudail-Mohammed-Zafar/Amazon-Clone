@@ -1,16 +1,110 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap");
 @import "tailwindcss";
 
 * {
-  font-family: "Outfit", sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 
 ::-webkit-scrollbar {
   display: none;
 }
 
+:root {
+  --surface-main: #f4f6fb;
+  --ink-900: #111827;
+  --ink-muted: #5c6778;
+  --brand-primary: #0f4c5c;
+  --brand-primary-dark: #093844;
+  --brand-accent: #ff8d5c;
+  --brand-accent-soft: #ffe6da;
+  --border-soft: #d9e2ec;
+}
+
 @theme {
-  --color-primary: #000000;
+  --color-primary: var(--brand-primary);
+}
+
+body {
+  background: var(--surface-main);
+  color: var(--ink-900);
+}
+
+.font-display {
+  font-family: "Sora", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+@keyframes uiFadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes uiFadeDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -14px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes uiFadeLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-18px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes uiFadeRight {
+  from {
+    opacity: 0;
+    transform: translate3d(18px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.ui-animate-fade-up {
+  animation: uiFadeUp 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ui-animate-fade-down {
+  animation: uiFadeDown 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ui-animate-fade-left {
+  animation: uiFadeLeft 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ui-animate-fade-right {
+  animation: uiFadeRight 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-animate-fade-up,
+  .ui-animate-fade-down,
+  .ui-animate-fade-left,
+  .ui-animate-fade-right {
+    animation: none !important;
+  }
 }
 
 .rich-text {

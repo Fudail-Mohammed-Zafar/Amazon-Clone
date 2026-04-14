@@ -1,56 +1,64 @@
 import { useState } from "react";
 import BlogCard from "./BlogCard";
-// eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
 import { useAppContext } from "@/context/useAppContext";
 import { blogCategories } from "@/assets/assets";
 
 const BlogList = () => {
   const [menu, setMenu] = useState("All");
   const { blogs, input } = useAppContext();
+  const availableBlogs = Array.isArray(blogs) ? blogs : [];
 
-  const filteredBlogs = () => {
+  const searchableBlogs = () => {
     if (input === "") {
-      return blogs;
+      return availableBlogs;
     }
-    return blogs.filter(
+    return availableBlogs.filter(
       (blog) =>
         blog.title.toLowerCase().includes(input.toLowerCase()) ||
         blog.category.toLowerCase().includes(input.toLowerCase()),
     );
   };
+
+  const visibleBlogs = searchableBlogs().filter((blog) =>
+    menu === "All" ? true : blog.category === menu,
+  );
+
   return (
-    <div>
-      <div className="flex justify-center gap-4 sm:gap-8 my-10 relative">
+    <section className="mx-auto w-[min(1120px,92%)] pb-12">
+      <div className="mb-6 flex flex-wrap items-center justify-center gap-2">
         {blogCategories.map((item) => (
-          <div key={item} className="relative">
-            <button
-              onClick={() => setMenu(item)}
-              className={`cursor-pointer text-gray-500 ${
-                menu === item && "text-white px-4 pt-0.5"
-              }`}
-            >
-              {item}
-              {menu === item && (
-                <motion.div
-                  layoutId="underline"
-                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  className="absolute left-0 right-0 top-0 h-7 -z-1 bg-primary rounded-full"
-                ></motion.div>
-              )}
-            </button>
-          </div>
+          <button
+            key={item}
+            onClick={() => setMenu(item)}
+            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+              menu === item
+                ? "border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white"
+                : "border-[var(--border-soft)] bg-white text-[var(--ink-muted)] hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]"
+            }`}
+          >
+            {item}
+          </button>
         ))}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 mb-24 mx-8 sm:mx-16 xl:mx-40">
-        {/* --- blog cards --- */}
-        {filteredBlogs()
-          .filter((blog) => (menu === "All" ? true : blog.category === menu))
-          .map((blog) => (
+
+      <div className="mb-7 flex justify-center">
+        <p className="text-sm text-[var(--ink-muted)]">
+          {visibleBlogs.length} {visibleBlogs.length === 1 ? "article" : "articles"}
+        </p>
+      </div>
+
+      {visibleBlogs.length === 0 ? (
+        <div className="rounded-2xl border border-dashed border-[var(--border-soft)] bg-white px-6 py-12 text-center text-[var(--ink-muted)]">
+          No blogs match your search yet. Try a different keyword.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {visibleBlogs.map((blog) => (
             <BlogCard key={blog._id} blog={blog} />
           ))}
-      </div>
-    </div>
+        </div>
+      )}
+    </section>
   );
 };
 

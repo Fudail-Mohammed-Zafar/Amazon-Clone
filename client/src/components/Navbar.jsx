@@ -5,18 +5,34 @@ const Navbar = () => {
   const { navigate, token } = useAppContext();
 
   return (
-    <div className="flex justify-between items-center py-5 mx-8 sm:mx-20 xl:mx-32">
-      <div className="flex flex-row justify-center items-center gap-1 md:gap-3">
-        <ChartNoAxesCombined onClick={() => navigate("/")} className="w-8 sm:w-12 cursor-pointer" />
-        <p className="font-semibold text-lg md:text-2xl">StockHub</p>
+    <nav className="pt-5 sm:pt-7">
+      <div className="mx-auto flex w-[min(1120px,92%)] items-center justify-between rounded-2xl border border-[var(--border-soft)] bg-white/75 px-4 py-3 shadow-[0_8px_24px_rgba(9,30,66,0.08)] backdrop-blur sm:px-6">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => navigate("/")}
+            className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--brand-accent-soft)] text-[var(--brand-primary)] transition hover:scale-[1.02] hover:bg-[var(--brand-accent)] hover:text-white"
+          >
+            <ChartNoAxesCombined className="h-5 w-5" />
+          </button>
+
+          <div className="leading-tight">
+            <p className="font-display text-lg text-[var(--ink-900)] sm:text-xl">
+              StockHub
+            </p>
+            <p className="hidden text-xs tracking-[0.16em] text-[var(--ink-muted)] sm:block">
+              MARKETS MADE HUMAN
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => navigate("/admin")}
+          className="rounded-xl border border-[var(--brand-primary)] bg-[var(--brand-primary)] px-4 py-2 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-[var(--brand-primary-dark)] hover:shadow-[0_8px_20px_rgba(15,76,92,0.25)] sm:px-5 sm:text-base"
+        >
+          {token ? "Dashboard" : "Admin Panel"}
+        </button>
       </div>
-      <button
-        onClick={() => navigate("/admin")}
-        className="group flex justify-center hover:cursor-pointer h-10 items-center gap-2 rounded-lg bg-neutral-200 pl-3 pr-4 transition-all duration-300 ease-in-out hover:bg-black hover:text-white active:bg-neutral-700"
-      >
-        <span>{token ? "Dashboard" : "Admin"}</span>
-      </button>
-    </div>
+    </nav>
   );
 };
 

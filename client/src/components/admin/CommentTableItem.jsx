@@ -45,36 +45,40 @@ const CommentTableItem = ({ comment, fetchComments }) => {
   };
 
   return (
-    <tr className="order-y border-gray-300">
-      <td className="px-6 py-4">
-        <b className="font-medium text-gray-600">Blog</b> : {blog.title}
+    <tr className="border-b border-[var(--border-soft)] text-[var(--ink-muted)]">
+      <td className="px-5 py-4 text-sm sm:px-6">
+        <b className="font-medium text-[var(--ink-900)]">Blog</b> : {blog?.title || "Deleted Blog"}
         <br />
         <br />
-        <b className="font-medium text-gray-600">Name</b> : {comment.name}
+        <b className="font-medium text-[var(--ink-900)]">Name</b> : {comment.name}
         <br />
-        <b className="font-medium text-gray-600">Comment</b> : {comment.content}
+        <b className="font-medium text-[var(--ink-900)]">Comment</b> : {comment.content}
       </td>
-      <td className="px-6 py-4 max-sm:hidden">
+      <td className="px-5 py-4 text-sm max-sm:hidden sm:px-6">
         {BlogDate.toLocaleDateString()}
       </td>
-      <td className="px-6 py-4">
-        <div className="inline-flex items-center gap-4">
+      <td className="px-5 py-4 sm:px-6">
+        <div className="inline-flex items-center gap-2">
           {!comment.isApproved ? (
-            <Check 
-              size={20} 
+            <button
               onClick={approveComment}
-              className="cursor-pointer hover:text-green-600 transition-colors"
-            />
+              className="rounded-lg border border-[var(--border-soft)] p-1.5 text-[var(--ink-muted)] transition hover:border-emerald-200 hover:text-emerald-600"
+              aria-label="Approve comment"
+            >
+              <Check className="h-4 w-4" />
+            </button>
           ) : (
-            <p className="text-xs border border-green-600 bg-green-100 text-green-600 rounded-full px-3 py-1">
+            <p className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
               Approved
             </p>
           )}
-          <Trash 
-            size={20} 
+          <button
             onClick={deleteComment}
-            className="cursor-pointer hover:text-red-600 transition-colors"
-          />
+            className="rounded-lg border border-[var(--border-soft)] p-1.5 text-[var(--ink-muted)] transition hover:border-red-200 hover:text-red-600"
+            aria-label="Delete comment"
+          >
+            <Trash className="h-4 w-4" />
+          </button>
         </div>
       </td>
     </tr>

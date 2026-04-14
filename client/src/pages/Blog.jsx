@@ -139,19 +139,6 @@ const Blog = () => {
             </button>
           </form>
         </div>
-        <div>
-          {/* Social Media Icons */}
-          <div className="my-24 max-w-3xl mx-auto">
-            <p className="font-semibold my-4">
-              Connect with me on Social Media!
-            </p>
-            <div className="flex">
-              <img src={"#"} width={50} alt="" />
-              <img src={"#"} width={50} alt="" />
-              <img src={"#"} width={50} alt="" />
-            </div>
-          </div>
-        </div>
       </div>
       <Footer />
     </div>
