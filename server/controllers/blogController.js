@@ -1,4 +1,3 @@
-import fs from "fs";
 import imagekit from "../configs/imageKit.js";
 import Blog from "../models/Blog.js";
 import Comment from "../models/Comment.js";
@@ -16,11 +15,9 @@ export const addBlog = async (req, res) => {
       return res.json({ success: false, message: "Missing required fields" });
     }
 
-    const fileBuffer = fs.readFileSync(imageFile.path);
-
-    // Upload Image to ImageKit
+    // Upload Image to ImageKit using memory buffer
     const response = await imagekit.upload({
-      file: fileBuffer,
+      file: imageFile.buffer,
       fileName: imageFile.originalname,
       folder: "/blogs",
     });
@@ -66,7 +63,7 @@ export const getBlogById = async (req, res) => {
     const { blogId } = req.params;
     const blog = await Blog.findById(blogId);
     if (!blog) {
-      res.json({ success: false, message: "Blog not found" });
+      return res.json({ success: false, message: "Blog not found" });
     }
     res.json({ success: true, blog });
   } catch (error) {

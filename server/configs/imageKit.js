@@ -1,21 +1,24 @@
 import ImageKit from "imagekit";
 
 // Initialisation
+let imagekit;
 
-var imagekit = new ImageKit({
-  publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
-  privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
-  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
-});
+if (
+  process.env.IMAGEKIT_PUBLIC_KEY &&
+  process.env.IMAGEKIT_PRIVATE_KEY &&
+  process.env.IMAGEKIT_URL_ENDPOINT
+) {
+  imagekit = new ImageKit({
+    publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+    privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+    urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
+  });
+}
 
 // Test ImageKit connection
 export const connectImageKit = () => {
   try {
-    if (
-      !process.env.IMAGEKIT_PUBLIC_KEY ||
-      !process.env.IMAGEKIT_PRIVATE_KEY ||
-      !process.env.IMAGEKIT_URL_ENDPOINT
-    ) {
+    if (!imagekit) {
       throw new Error("ImageKit credentials are not set");
     }
     // ImageKit doesn't have a direct connection test, but we can verify credentials
